@@ -3,8 +3,5 @@
 public class Enigma {
     public static void main(String[] args) {
         // test Rotor class
-        Rotor rtr = new Rotor();
-        rtr.setRotor("IV", 25);
-
     }
 }
