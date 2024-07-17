@@ -1,3 +1,6 @@
 public class Rotor {
-    //write rotor class here
+
+    public Rotor(String name, String encoding, int rotorPos, int notPos, int ringSetting){
+
+    }
 }
