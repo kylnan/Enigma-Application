@@ -33,8 +33,8 @@ public class Enigma{
         }
 
         // Test encoding forward
-        rotor1.setPosition(0);
-        if (rotor1.encodeForward('A') == 'E') {
+        rotor1.setPosition(3);
+        if (rotor1.encodeForward('A') == 'C') {
             System.out.println("Rotor 1 encodes forward correctly.");
         } else {
             System.out.println("Error in Rotor 1 forward encoding.");

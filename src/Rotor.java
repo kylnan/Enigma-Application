@@ -46,6 +46,7 @@ public class Rotor {
         // convert input character to index and adjust for rotor position
         int index = (input - 'A' + position) % 26;
 
+        // Find index of the character in the wiring
         int wiringIndex = (wiring.indexOf((char) (index + 'A')));
 
         // Adjust back for rotor position
