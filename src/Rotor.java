@@ -4,10 +4,10 @@ public class Rotor {
     private int notch;      // The notch position that sets off the next rotor found on https://en.wikipedia.org/wiki/Enigma_machine#Rotors
 
     // Constructor
-    public Rotor(String wiring, int notch) {
+    public Rotor(String wiring, char notch) {
         this.wiring = wiring;
         this.position = 0; // setting default position to 0
-        this.notch = notch;
+        this.notch = notch - 'A';
     }
 
     // set initial position of the rotor
@@ -28,27 +28,23 @@ public class Rotor {
         - meaning this shifts the character forward in the alphabet by the number of positions the rotor has advanced
         - the adjusted character is then substituted using the rotor's wiring
      */
-    public char encodeForward(char input){
-        // convert input character to index
-        int index = input - 'A';
 
-        // Adjust for rotor position
-        index = (index + position) % 26;
+
+    public char encodeForward(char input){
+        // convert input character to index and adjust for rotor position
+        int index = (input - 'A' + position) % 26;
 
         // Substitute using wiring;
         char substitute = wiring.charAt(index);
 
-        // Adjust back for rotor position
-        int outputIndex = (substitute - 'A' - position + 26) % 26;
-        return (char)(outputIndex + 'A');
+        //Adjust back for rotor position
+        int substituteIndex = (substitute - 'A' - position + 26) % 26;
+        return (char)(substituteIndex + 'A');
     }
 
     public char encodeBackward(char input){
-        // convert input character to index
-        int index = input - 'A';
-
-        // Adjust for rotor position
-        index = (index + position + 26) % 26;
+        // convert input character to index and adjust for rotor position
+        int index = (input - 'A' + position) % 26;
 
         int wiringIndex = (wiring.indexOf((char) (index + 'A')));
 
