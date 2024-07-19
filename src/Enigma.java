@@ -1,7 +1,3 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-
-
 /* Rotor and Reflector Strings
 
     -------------Rotors---------------
@@ -17,12 +13,21 @@
  */
 public class Enigma{
     public static void main(String[] args) {
-        // Example rotor wirings and notch positions
-        Rotor rotor1 = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'R');
-        Rotor rotor2 = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'F');
-        Rotor rotor3 = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'W');
+        String I = "EKMFLGDQVZNTOWYHXUSPAIBRCJ";
+        String II = "AJDKSIRUXBLHWTMCQGZNPYFVOE";
+        String III = "BDFHJLCPRTXVZNYEIWGAKMUSQO";
+        String IV = "ESOVPZJAYQUIRHXLNFTGKDCMWB";
+        String V = "VZBRGITYUPSDNHLXAWMJQOFECK";
 
-        /* Test setting positions
+        String reflectorB = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
+        String reflectorC = "FVPJIAOYEDRZXWGCTKUQSBNMHL";
+
+        // Example rotor wirings and notch positions
+        Rotor rotor1 = new Rotor(I, 'R');
+        Rotor rotor2 = new Rotor(II, 'F');
+        Rotor rotor3 = new Rotor(III, 'W');
+
+        // Test setting positions
         rotor1.setPosition(5);
         if (rotor1.getPosition() == 5) {
             System.out.println("Rotor 1 position set correctly.");
@@ -77,10 +82,9 @@ public class Enigma{
         } else {
             System.out.println("Error in Rotor 1 notch detection.");
         }
-         */
 
         // Test Reflector encoding
-        Reflector reflector = new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT");
+        Reflector reflector = new Reflector(reflectorB);
         if (reflector.encodeForward('B') == 'R' && reflector.encodeBackward('R') == 'B'){
             System.out.println("Reflector Works!");
         }

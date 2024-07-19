@@ -1,7 +1,7 @@
 public class Rotor {
-    private String wiring;  // rotor sets I-V
+    private final String wiring;  // rotor sets I-V
     private int position;   // gives current index/position of the rotor
-    private int notch;      // The notch position that sets off the next rotor found on https://en.wikipedia.org/wiki/Enigma_machine#Rotors
+    private final int notch;      // The notch position that sets off the next rotor found on https://en.wikipedia.org/wiki/Enigma_machine#Rotors
 
     // Constructor
     public Rotor(String wiring, char notch) {
