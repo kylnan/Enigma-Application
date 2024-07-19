@@ -23,64 +23,64 @@ public class Enigma{
         String reflectorC = "FVPJIAOYEDRZXWGCTKUQSBNMHL";
 
         // Example rotor wirings and notch positions
-        Rotor rotor1 = new Rotor(I, 'R');
+        Rotor right = new Rotor(I, 'R');
         Rotor rotor2 = new Rotor(II, 'F');
         Rotor rotor3 = new Rotor(III, 'W');
 
         // Test setting positions
-        rotor1.setPosition(5);
-        if (rotor1.getPosition() == 5) {
-            System.out.println("Rotor 1 position set correctly.");
+        right.setPosition(5);
+        if (right.getPosition() == 5) {
+            System.out.println("Right Rotor position set correctly.");
         } else {
-            System.out.println("Error in setting Rotor 1 position.");
+            System.out.println("Error in setting Right Rotor position.");
         }
 
         // Test advancing rotors
-        rotor1.setPosition(0);
-        rotor1.step();
-        if (rotor1.getPosition() == 1) {
-            System.out.println("Rotor 1 advanced correctly.");
+        right.setPosition(0);
+        right.step();
+        if (right.getPosition() == 1) {
+            System.out.println("Right Rotor advanced correctly.");
         } else {
-            System.out.println("Error in advancing Rotor 1.");
+            System.out.println("Error in advancing Right Rotor.");
         }
 
-        rotor1.setPosition(25);
-        rotor1.step();
-        if (rotor1.getPosition() == 0) {
-            System.out.println("Rotor 1 wrapped around correctly.");
+        right.setPosition(25);
+        right.step();
+        if (right.getPosition() == 0) {
+            System.out.println("Right Rotor wrapped around correctly.");
         } else {
-            System.out.println("Error in Rotor 1 wrapping around.");
+            System.out.println("Error in Right Rotor wrapping around.");
         }
 
         // Test encoding forward
-        rotor1.setPosition(3);
-        if (rotor1.encodeForward('A') == 'C') {
-            System.out.println("Rotor 1 encodes forward correctly.");
+        right.setPosition(3);
+        if (right.encodeForward('A') == 'C') {
+            System.out.println("Right Rotor encodes forward correctly.");
         } else {
-            System.out.println("Error in Rotor 1 forward encoding.");
+            System.out.println("Error in Right Rotor forward encoding.");
         }
 
         // Test encoding backward
-        rotor1.setPosition(0);
-        if (rotor1.encodeBackward('E') == 'A' && rotor1.encodeBackward('K') == 'B') {
-            System.out.println("Rotor 1 encodes backward correctly.");
+        right.setPosition(0);
+        if (right.encodeBackward('E') == 'A' && right.encodeBackward('K') == 'B') {
+            System.out.println("Right Rotor encodes backward correctly.");
         } else {
-            System.out.println("Error in Rotor 1 backward encoding.");
+            System.out.println("Error in Right Rotor backward encoding.");
         }
 
         // Test notch detection
-        rotor1.setPosition(17);
-        if (rotor1.atNotch()) {
-            System.out.println("Rotor 1 correctly detects notch.");
+        right.setPosition(17);
+        if (right.atNotch()) {
+            System.out.println("Right Rotor correctly detects notch.");
         } else {
-            System.out.println("Error in Rotor 1 notch detection.");
+            System.out.println("Error in Right Rotor notch detection.");
         }
 
-        rotor1.setPosition(16);
-        if (!rotor1.atNotch()) {
-            System.out.println("Rotor 1 correctly does not detect notch.");
+        right.setPosition(16);
+        if (!right.atNotch()) {
+            System.out.println("Right Rotor correctly does not detect notch.");
         } else {
-            System.out.println("Error in Rotor 1 notch detection.");
+            System.out.println("Error in Right Rotor notch detection.");
         }
 
         // Test Reflector encoding
