@@ -31,20 +31,32 @@ public class Rotor {
 
 
     public char encodeForward(char input){
+        if (input == ' '){
+            return ' ';
+        }
+        char x = Character.toUpperCase(input);
         // convert input character to index and adjust for rotor position
-        int index = (input - 'A' + position) % 26;
+        int index = (x - 'A' + position) % 26;
 
         // Substitute using wiring;
-        char substitute = wiring.charAt(index);
+        return wiring.charAt(index);
 
-        //Adjust back for rotor position
+        /* Adjust back for rotor position
         int substituteIndex = (substitute - 'A' - position + 26) % 26;
         return (char)(substituteIndex + 'A');
+        */
     }
 
     public char encodeBackward(char input){
+        if (input == ' '){
+            return ' ';
+        }
+
+        char x = Character.toUpperCase(input);
+
         // convert input character to index and adjust for rotor position
-        int index = (input - 'A' + position) % 26;
+        int index = (x - 'A' + position) % 26;
+
 
         // Find index of the character in the wiring
         int wiringIndex = (wiring.indexOf((char) (index + 'A')));
