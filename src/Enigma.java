@@ -23,125 +23,53 @@ public class Enigma{
         String reflectorC = "FVPJIAOYEDRZXWGCTKUQSBNMHL";
 
         // Example rotor wirings and notch positions
-        Rotor right = new Rotor(I, 'R');
-        Rotor middle = new Rotor(II, 'F');
-        Rotor left = new Rotor(III, 'W');
+        Rotor left = new Rotor(I, 'Q');
+        Rotor middle = new Rotor(II, 'E');
+        Rotor right = new Rotor(III, 'V');
 
         // Example Reflector
         Reflector reflector = new Reflector(reflectorB);
 
-        /* Test setting positions
-        right.setPosition(5);
-        if (right.getPosition() == 5) {
-            System.out.println("Right Rotor position set correctly.");
-        } else {
-            System.out.println("Error in setting Right Rotor position.");
-        }
-
-        // Test advancing rotors
-        right.setPosition(0);
-        right.step();
-        if (right.getPosition() == 1) {
-            System.out.println("Right Rotor advanced correctly.");
-        } else {
-            System.out.println("Error in advancing Right Rotor.");
-        }
-
-        right.setPosition(25);
-        right.step();
-        if (right.getPosition() == 0) {
-            System.out.println("Right Rotor wrapped around correctly.");
-        } else {
-            System.out.println("Error in Right Rotor wrapping around.");
-        }
-
-        // Test encoding forward
-        for (int i = 0; i < 26; i++){
-            right.setPosition(i);
-            System.out.print(right.encodeForward((char)(i + 'A')) + " ");
-        }
-        System.out.println();
-        for (int i = 0; i < 26; i++){
-            right.setPosition(i);
-            System.out.print(middle.encodeForward((char)(i + 'A')) + " ");
-        }
-        System.out.println();
-        for (int i = 0; i < 26; i++){
-            right.setPosition(i);
-            System.out.print(left.encodeForward((char)(i + 'A')) + " ");
-        }
-        System.out.println();
-        if (right.encodeForward('A') == 'M') {
-            System.out.println("Right Rotor encodes forward correctly.");
-        } else {
-
-            System.out.println("Error in Right Rotor forward encoding.");
-        }
-
-        // Test encoding backward
-        for (int i = 0; i < 26; i++){
-            right.setPosition(0);
-            System.out.print(right.encodeBackward(I.charAt(i)) + " ");
-        }
-        System.out.println();
-        if (right.encodeBackward('E') == 'A' && right.encodeBackward('K') == 'B') {
-            System.out.println("Right Rotor encodes backward correctly.");
-        } else {
-            System.out.println("Error in Right Rotor backward encoding.");
-        }
-
-        // Test notch detection
-        right.setPosition(17);
-        if (right.atNotch()) {
-            System.out.println("Right Rotor correctly detects notch.");
-        } else {
-            System.out.println("Error in Right Rotor notch detection.");
-        }
-
-        right.setPosition(16);
-        if (!right.atNotch()) {
-            System.out.println("Right Rotor correctly does not detect notch.");
-        } else {
-            System.out.println("Error in Right Rotor notch detection.");
-        }
-
-        // Test Reflector encoding
-        for (int i = 0; i < 26; i++){
-            System.out.print(reflector.encodeForward((char)(i+'A')) + " ");
-        }
-        System.out.println();
-        */
-        // Test all 3 rotors
+        // Test all 3 rotors + reflector
         right.setPosition(0);
         middle.setPosition(0);
         left.setPosition(0);
         String message = "hello world";
         StringBuilder cipher = new StringBuilder();
         for (int i = 0; i < message.length(); i++){
-            cipher.append(encode(left,middle, right, reflector, message.charAt(i)));
+            cipher.append(encode(left ,middle, right, reflector, message.charAt(i)));
         }
         System.out.println("Cipher is: " + cipher);
     }
 
     public static char encode(Rotor left, Rotor middle, Rotor right, Reflector reflector, char c){
-        if(middle.atNotch()) {
+        if (c == ' '){
+            return ' ';
+        }
+
+        if (middle.atNotch()) {
             middle.step();
             left.step();
-        }
-        else if(right.atNotch()){
+        } else if(right.atNotch()){
             middle.step();
         }
         right.step();
 
+        // Right to left encoding
         char signal = right.encodeForward(c);
         char s1 = middle.encodeForward(signal);
         char s2 = left.encodeForward(s1);
 
+        // Through reflector
         char s3 = reflector.encodeForward(s2);
 
+        // Left to right encoding
         char s4 = left.encodeBackward(s3);
         char s5 = middle.encodeBackward(s4);
+        char s6 = right.encodeBackward(s5);
 
-        return right.encodeBackward(s5);
+        //Plugboard should go here
+
+        return s6;
     }
 }

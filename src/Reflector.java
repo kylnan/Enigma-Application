@@ -6,13 +6,7 @@ public class Reflector {
     }
 
     public char encodeForward(char input){
-        if (input == ' '){
-            return ' ';
-        }
-        // convert input character to index
         int index = (Character.toUpperCase(input) - 'A') % 26;
-
-        // Substitute using wiring;
        return wiring.charAt(index);
     }
 }

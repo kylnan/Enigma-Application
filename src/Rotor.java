@@ -2,6 +2,7 @@ public class Rotor {
     private final String wiring;  // rotor sets I-V
     private int position;   // gives current index/position of the rotor
     private final int notch;      // The notch position that sets off the next rotor found on https://en.wikipedia.org/wiki/Enigma_machine#Rotors
+    private final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     // Constructor
     public Rotor(String wiring, char notch) {
@@ -23,45 +24,22 @@ public class Rotor {
         this.position = (this.position + 1) % 26;
     }
 
-    /*
-        - The input character needs to be adjusted by the rotor's current position.
-        - meaning this shifts the character forward in the alphabet by the number of positions the rotor has advanced
-        - the adjusted character is then substituted using the rotor's wiring
-     */
-
-
     public char encodeForward(char input){
-        if (input == ' '){
-            return ' ';
-        }
+        // ensure uppercase input like the real thing
         char x = Character.toUpperCase(input);
-        // convert input character to index and adjust for rotor position
+        // convert the input character to an index in the alphabet with respect to position
         int index = (x - 'A' + position) % 26;
-
-        // Substitute using wiring;
-        return wiring.charAt(index);
-
-        /* Adjust back for rotor position
+        // find where input character is mapped to in wiring
+        char substitute = wiring.charAt(index);
+        // Find substitute in alphabet and rotate rotor back to 0
         int substituteIndex = (substitute - 'A' - position + 26) % 26;
-        return (char)(substituteIndex + 'A');
-        */
+        return alphabet.charAt(substituteIndex);
     }
 
     public char encodeBackward(char input){
-        if (input == ' '){
-            return ' ';
-        }
-
         char x = Character.toUpperCase(input);
-
-        // convert input character to index and adjust for rotor position
         int index = (x - 'A' + position) % 26;
-
-
-        // Find index of the character in the wiring
         int wiringIndex = (wiring.indexOf((char) (index + 'A')));
-
-        // Adjust back for rotor position
         int outputIndex = (wiringIndex - position + 26) % 26;
         return (char)(outputIndex + 'A');
     }
