@@ -41,7 +41,7 @@ public class Rotor {
         int index = (x - 'A' + position) % 26;
         int wiringIndex = (wiring.indexOf((char) (index + 'A')));
         int outputIndex = (wiringIndex - position + 26) % 26;
-        return (char)(outputIndex + 'A');
+        return alphabet.charAt(outputIndex);
     }
 
     public int getPosition(){

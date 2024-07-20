@@ -34,15 +34,24 @@ public class Enigma{
         right.setPosition(0);
         middle.setPosition(0);
         left.setPosition(0);
-        String message = "hello world";
+        String message = "Welcome to Enigma";
         StringBuilder cipher = new StringBuilder();
         for (int i = 0; i < message.length(); i++){
-            cipher.append(encode(left ,middle, right, reflector, message.charAt(i)));
+            cipher.append(encodeDecode(left ,middle, right, reflector, message.charAt(i)));
         }
         System.out.println("Cipher is: " + cipher);
+
+        right.setPosition(0);
+        middle.setPosition(0);
+        left.setPosition(0);
+        StringBuilder decipher = new StringBuilder();
+        for (int i = 0; i < message.length(); i++){
+            decipher.append(encodeDecode(left ,middle, right, reflector, cipher.charAt(i)));
+        }
+        System.out.println("Decipher is: " + decipher);
     }
 
-    public static char encode(Rotor left, Rotor middle, Rotor right, Reflector reflector, char c){
+    public static char encodeDecode(Rotor left, Rotor middle, Rotor right, Reflector reflector, char c){
         if (c == ' '){
             return ' ';
         }
