@@ -35,8 +35,7 @@ public class Rotor {
     }
 
     public char encodeBackward(char input){
-        char x = Character.toUpperCase(input);
-        int index = (x - 'A' + position) % 26;
+        int index = (input - 'A' + position) % 26;
         int wiringIndex = (wiring.indexOf((char) (index + 'A')));
         int outputIndex = (wiringIndex - position + 26) % 26;
         return alphabet.charAt(outputIndex);

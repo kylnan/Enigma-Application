@@ -11,6 +11,7 @@
     Reflector B = YRUHQSLDPXNGOKMIEBFZCWVJAT
     Reflector C = FVPJIAOYEDRZXWGCTKUQSBNMHL
  */
+
 public class Enigma{
 
     public static void rotate(Rotor left, Rotor middle, Rotor right){
