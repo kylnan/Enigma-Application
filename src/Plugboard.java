@@ -6,7 +6,7 @@ public class Plugboard {
     public Plugboard(String wires) {
         String[] pairs = wires.split(" ");
         for (String pair : pairs) {
-            if (pair.length() == 0) {
+            if (pair.isEmpty()) {
                 break;
             }
             char a = pair.charAt(0);
