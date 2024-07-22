@@ -5,8 +5,8 @@ public class Reflector {
         this.wiring = wiring;
     }
 
-    public char encodeForward(char input){
-        int index = (Character.toUpperCase(input) - 'A') % 26;
+    public char encode(char input){
+        int index = ((input) - 'A') % 26;
        return wiring.charAt(index);
     }
 }

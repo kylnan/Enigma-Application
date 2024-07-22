@@ -12,50 +12,8 @@
     Reflector C = FVPJIAOYEDRZXWGCTKUQSBNMHL
  */
 public class Enigma{
-    public static void main(String[] args) {
-        String I = "EKMFLGDQVZNTOWYHXUSPAIBRCJ";
-        String II = "AJDKSIRUXBLHWTMCQGZNPYFVOE";
-        String III = "BDFHJLCPRTXVZNYEIWGAKMUSQO";
-        String IV = "ESOVPZJAYQUIRHXLNFTGKDCMWB";
-        String V = "VZBRGITYUPSDNHLXAWMJQOFECK";
 
-        String reflectorB = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
-        String reflectorC = "FVPJIAOYEDRZXWGCTKUQSBNMHL";
-
-        // Example rotor wirings and notch positions
-        Rotor left = new Rotor(I, 'Q');
-        Rotor middle = new Rotor(II, 'E');
-        Rotor right = new Rotor(III, 'V');
-
-        // Example Reflector
-        Reflector reflector = new Reflector(reflectorB);
-
-        // Test all 3 rotors + reflector
-        right.setPosition(0);
-        middle.setPosition(0);
-        left.setPosition(0);
-        String message = "Welcome to Enigma";
-        StringBuilder cipher = new StringBuilder();
-        for (int i = 0; i < message.length(); i++){
-            cipher.append(encodeDecode(left ,middle, right, reflector, message.charAt(i)));
-        }
-        System.out.println("Cipher is: " + cipher);
-
-        right.setPosition(0);
-        middle.setPosition(0);
-        left.setPosition(0);
-        StringBuilder decipher = new StringBuilder();
-        for (int i = 0; i < message.length(); i++){
-            decipher.append(encodeDecode(left ,middle, right, reflector, cipher.charAt(i)));
-        }
-        System.out.println("Decipher is: " + decipher);
-    }
-
-    public static char encodeDecode(Rotor left, Rotor middle, Rotor right, Reflector reflector, char c){
-        if (c == ' '){
-            return ' ';
-        }
-
+    public static void rotate(Rotor left, Rotor middle, Rotor right){
         if (middle.atNotch()) {
             middle.step();
             left.step();
@@ -63,22 +21,66 @@ public class Enigma{
             middle.step();
         }
         right.step();
+    }
+
+    public static char encodeDecode(Rotor left, Rotor middle, Rotor right, Reflector reflector, Plugboard plugboard, char c){
+        if (c == ' '){
+            return ' ';
+        }
+        rotate(left, middle, right);
+
+        //Plugboard in
+        char signal = plugboard.encode(c);
 
         // Right to left encoding
-        char signal = right.encodeForward(c);
-        char s1 = middle.encodeForward(signal);
-        char s2 = left.encodeForward(s1);
+        char s1 = right.encodeForward(signal);
+        char s2 = middle.encodeForward(s1);
+        char s3 = left.encodeForward(s2);
 
         // Through reflector
-        char s3 = reflector.encodeForward(s2);
+        char s4 = reflector.encode(s3);
 
         // Left to right encoding
-        char s4 = left.encodeBackward(s3);
-        char s5 = middle.encodeBackward(s4);
-        char s6 = right.encodeBackward(s5);
+        char s5 = left.encodeBackward(s4);
+        char s6 = middle.encodeBackward(s5);
+        char s7 = right.encodeBackward(s6);
 
-        //Plugboard should go here
+        //Plugboard out
+        s7 = plugboard.encode(s7);
 
-        return s6;
+        return s7;
     }
+
+    public static void main(String[] args) {
+        // Example usage with rotors I, II, III and reflector B
+        Rotor right = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q'); // Rotor I
+        Rotor middle = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E'); // Rotor II
+        Rotor left = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V'); // Rotor III
+        Reflector reflector = new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT"); // Reflector B
+        Plugboard plugboard = new Plugboard("AB CD EF GH");
+
+        // Example encode/decode
+        String message = "welcome to enigma".toUpperCase();
+        StringBuilder encodedMessage = new StringBuilder();
+
+        for (char c : message.toCharArray()) {
+            encodedMessage.append(encodeDecode(left, middle, right, reflector, plugboard, c));
+        }
+
+        System.out.println("Encoded Message: " + encodedMessage);
+
+        // Reset rotor positions to decode
+        right.setPosition(0);
+        middle.setPosition(0);
+        left.setPosition(0);
+
+        StringBuilder decodedMessage = new StringBuilder();
+
+        for (char c : encodedMessage.toString().toCharArray()) {
+            decodedMessage.append(encodeDecode(left, middle, right, reflector, plugboard, c));
+        }
+
+        System.out.println("Decoded Message: " + decodedMessage);
+    }
+
 }

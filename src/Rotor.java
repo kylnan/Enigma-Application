@@ -25,10 +25,8 @@ public class Rotor {
     }
 
     public char encodeForward(char input){
-        // ensure uppercase input like the real thing
-        char x = Character.toUpperCase(input);
         // convert the input character to an index in the alphabet with respect to position
-        int index = (x - 'A' + position) % 26;
+        int index = (input - 'A' + position) % 26;
         // find where input character is mapped to in wiring
         char substitute = wiring.charAt(index);
         // Find substitute in alphabet and rotate rotor back to 0
@@ -43,6 +41,7 @@ public class Rotor {
         int outputIndex = (wiringIndex - position + 26) % 26;
         return alphabet.charAt(outputIndex);
     }
+
 
     public int getPosition(){
         return this.position;
