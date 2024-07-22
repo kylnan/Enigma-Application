@@ -25,7 +25,7 @@ public class Enigma{
     }
 
     public static char encodeDecode(Rotor left, Rotor middle, Rotor right, Reflector reflector, Plugboard plugboard, char c){
-        if (c == ' '){
+        if (c < 'A'){
             return ' ';
         }
         rotate(left, middle, right);
@@ -61,10 +61,11 @@ public class Enigma{
         Plugboard plugboard = new Plugboard("AB CD EF GH");
 
         // Example encode/decode
-        String message = "welcome to enigma".toUpperCase();
+        String message = "welcome to enigma";
+        String correctedMsg = message.toUpperCase();
         StringBuilder encodedMessage = new StringBuilder();
 
-        for (char c : message.toCharArray()) {
+        for (char c : correctedMsg.toCharArray()) {
             encodedMessage.append(encodeDecode(left, middle, right, reflector, plugboard, c));
         }
 
