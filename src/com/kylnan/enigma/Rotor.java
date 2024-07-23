@@ -1,4 +1,4 @@
-package kylnan.enigma;
+package com.kylnan.enigma;
 
 public class Rotor {
     private final String wiring;  // rotor sets I-V

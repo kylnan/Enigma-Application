@@ -1,4 +1,4 @@
-package kylnan.enigma;
+package com.kylnan.enigma;
 
 public class Enigma{
 
@@ -18,7 +18,7 @@ public class Enigma{
         }
         rotate(left, middle, right);
 
-        //kylnan.enigma.Plugboard in
+        //com.kylnan.enigma.Plugboard in
         char signal = plugboard.encode(c);
 
         // Right to left encoding
@@ -34,7 +34,7 @@ public class Enigma{
         char s6 = middle.encodeBackward(s5);
         char s7 = right.encodeBackward(s6);
 
-        //kylnan.enigma.Plugboard out
+        //com.kylnan.enigma.Plugboard out
         s7 = plugboard.encode(s7);
 
         return s7;
@@ -42,14 +42,14 @@ public class Enigma{
 
     public static void main(String[] args) {
         // Example usage with rotors I, II, III and reflector B
-        Rotor right = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q'); // kylnan.enigma.Rotor I
-        Rotor middle = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E'); // kylnan.enigma.Rotor II
-        Rotor left = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V'); // kylnan.enigma.Rotor III
-        Reflector reflector = new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT"); // kylnan.enigma.Reflector B
+        Rotor right = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q'); // com.kylnan.enigma.Rotor I
+        Rotor middle = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E'); // com.kylnan.enigma.Rotor II
+        Rotor left = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V'); // com.kylnan.enigma.Rotor III
+        Reflector reflector = new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT"); // com.kylnan.enigma.Reflector B
         Plugboard plugboard = new Plugboard("AB CD EF GH");
 
         // Example encode/decode
-        String message = "welcome to com.kylnan.enigma";
+        String message = "welcome to com.com.kylnan.enigma";
         String correctedMsg = message.toUpperCase();
         StringBuilder encodedMessage = new StringBuilder();
 

@@ -1,4 +1,4 @@
-package kylnan.enigma;
+package com.kylnan.enigma;
 
 public class Reflector {
     private final String wiring;

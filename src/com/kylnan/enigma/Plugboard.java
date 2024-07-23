@@ -1,4 +1,4 @@
-package kylnan.enigma;
+package com.kylnan.enigma;
 
 import java.util.HashMap;
 
