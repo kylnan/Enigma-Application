@@ -1,3 +1,5 @@
+package kylnan.enigma;
+
 public class Rotor {
     private final String wiring;  // rotor sets I-V
     private int position;   // gives current index/position of the rotor
@@ -47,6 +49,6 @@ public class Rotor {
     }
 
     public boolean atNotch(){
-        return position == this.notch;
+        return getPosition() == this.notch;
     }
 }

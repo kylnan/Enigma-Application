@@ -1,3 +1,5 @@
+package kylnan.enigma;
+
 public class Reflector {
     private final String wiring;
     // The reflector should encode similarly to the rotors it just doesn't have the step functionality

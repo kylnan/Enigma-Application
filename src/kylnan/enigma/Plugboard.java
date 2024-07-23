@@ -1,3 +1,5 @@
+package kylnan.enigma;
+
 import java.util.HashMap;
 
 public class Plugboard {

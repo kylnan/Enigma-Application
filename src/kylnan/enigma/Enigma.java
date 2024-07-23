@@ -1,16 +1,4 @@
-/* Rotor and Reflector Strings
-
-    -------------Rotors---------------
-    I     = EKMFLGDQVZNTOWYHXUSPAIBRCJ
-    II    = AJDKSIRUXBLHWTMCQGZNPYFVOE
-    III   = BDFHJLCPRTXVZNYEIWGAKMUSQO
-    IV    = ESOVPZJAYQUIRHXLNFTGKDCMWB
-    V     = VZBRGITYUPSDNHLXAWMJQOFECK
-
-    --------------Reflectors----------------
-    Reflector B = YRUHQSLDPXNGOKMIEBFZCWVJAT
-    Reflector C = FVPJIAOYEDRZXWGCTKUQSBNMHL
- */
+package kylnan.enigma;
 
 public class Enigma{
 
@@ -30,7 +18,7 @@ public class Enigma{
         }
         rotate(left, middle, right);
 
-        //Plugboard in
+        //kylnan.enigma.Plugboard in
         char signal = plugboard.encode(c);
 
         // Right to left encoding
@@ -46,7 +34,7 @@ public class Enigma{
         char s6 = middle.encodeBackward(s5);
         char s7 = right.encodeBackward(s6);
 
-        //Plugboard out
+        //kylnan.enigma.Plugboard out
         s7 = plugboard.encode(s7);
 
         return s7;
@@ -54,14 +42,14 @@ public class Enigma{
 
     public static void main(String[] args) {
         // Example usage with rotors I, II, III and reflector B
-        Rotor right = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q'); // Rotor I
-        Rotor middle = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E'); // Rotor II
-        Rotor left = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V'); // Rotor III
-        Reflector reflector = new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT"); // Reflector B
+        Rotor right = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q'); // kylnan.enigma.Rotor I
+        Rotor middle = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E'); // kylnan.enigma.Rotor II
+        Rotor left = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V'); // kylnan.enigma.Rotor III
+        Reflector reflector = new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT"); // kylnan.enigma.Reflector B
         Plugboard plugboard = new Plugboard("AB CD EF GH");
 
         // Example encode/decode
-        String message = "welcome to enigma";
+        String message = "welcome to com.kylnan.enigma";
         String correctedMsg = message.toUpperCase();
         StringBuilder encodedMessage = new StringBuilder();
 
