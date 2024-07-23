@@ -49,7 +49,7 @@ public class Enigma{
         Plugboard plugboard = new Plugboard("AB CD EF GH");
 
         // Example encode/decode
-        String message = "welcome to com.com.kylnan.enigma";
+        String message = "welcome to enigma";
         String correctedMsg = message.toUpperCase();
         StringBuilder encodedMessage = new StringBuilder();
 
