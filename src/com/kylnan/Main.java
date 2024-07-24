@@ -4,7 +4,7 @@ import javafx.application.Application;
 
 public class Main {
     public static void main(String[] args) {
-        // Application.launch(com.kylnan.GUI.class, args);
+        Application.launch(com.kylnan.GUI.class, args);
 
         // Enigma Testing for encapsulation
         Enigma enigma = new Enigma("I", "II", "III", "B", "");
