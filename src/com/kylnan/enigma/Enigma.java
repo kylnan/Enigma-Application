@@ -16,22 +16,22 @@ public class Enigma {
     }
 
     private Rotor createRotor(String type) {
-        switch(type) {
-            case "I": return new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'R');
-            case "II": return new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'F');
-            case "III": return new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'W');
-            case "IV": return new Rotor("ESOVPZJAYQUIRHXLNFTGKDCMWB", 'K');
-            case "V": return new Rotor("VZBRGITYUPSDNHLXAWMJQOFECK", 'A');
-            default: throw new IllegalArgumentException("Invalid rotor type: " + type);
-        }
+        return switch (type) {
+            case "I" -> new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'R');
+            case "II" -> new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'F');
+            case "III" -> new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'W');
+            case "IV" -> new Rotor("ESOVPZJAYQUIRHXLNFTGKDCMWB", 'K');
+            case "V" -> new Rotor("VZBRGITYUPSDNHLXAWMJQOFECK", 'A');
+            default -> throw new IllegalArgumentException("Invalid rotor type: " + type);
+        };
     }
 
     private Reflector createReflector(String type) {
-        switch(type) {
-            case "B": return new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT");
-            case "C": return new Reflector("FVPJIAOYEDRZXWGCTKUQSBNMHL");
-            default: throw new IllegalArgumentException("Invalid reflector type: " + type);
-        }
+        return switch (type) {
+            case "B" -> new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT");
+            case "C" -> new Reflector("FVPJIAOYEDRZXWGCTKUQSBNMHL");
+            default -> throw new IllegalArgumentException("Invalid reflector type: " + type);
+        };
     }
 
     public void setRotors(int left, int middle, int right) {
