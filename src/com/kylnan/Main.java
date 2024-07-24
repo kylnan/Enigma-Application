@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         Application.launch(com.kylnan.GUI.class, args);
 
-        // Enigma Testing for encapsulation
+        /* Enigma Testing for encapsulation
         Enigma enigma = new Enigma("I", "II", "III", "B", "");
 
         enigma.setRotors(0, 0, 0);
@@ -29,5 +29,6 @@ public class Main {
             decoded.append(enigma.encodeDecode(c));
         }
         System.out.println(STR."Decoded message: \{decoded.toString()}");
+         */
     }
 }
