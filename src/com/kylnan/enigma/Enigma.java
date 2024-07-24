@@ -1,76 +1,78 @@
 package com.kylnan.enigma;
 
-public class Enigma{
+public class Enigma {
+    private Rotor left;
+    private Rotor middle;
+    private Rotor right;
+    private final Reflector reflector;
+    private final Plugboard plugboard;
 
-    public static void rotate(Rotor left, Rotor middle, Rotor right){
-        if (middle.atNotch()) {
-            middle.step();
-            left.step();
-        } else if(right.atNotch()){
-            middle.step();
-        }
-        right.step();
+    public Enigma(String left, String middle, String right, String reflector, String plugboard) {
+        this.left = createRotor(left);
+        this.middle = createRotor(middle);
+        this.right = createRotor(right);
+        this.reflector = createReflector(reflector);
+        this.plugboard = new Plugboard(plugboard);
     }
 
-    public static char encodeDecode(Rotor left, Rotor middle, Rotor right, Reflector reflector, Plugboard plugboard, char c){
-        if (c < 'A'){
+    private Rotor createRotor(String type) {
+        switch(type) {
+            case "I": return new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'R');
+            case "II": return new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'F');
+            case "III": return new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'W');
+            case "IV": return new Rotor("ESOVPZJAYQUIRHXLNFTGKDCMWB", 'K');
+            case "V": return new Rotor("VZBRGITYUPSDNHLXAWMJQOFECK", 'A');
+            default: throw new IllegalArgumentException("Invalid rotor type: " + type);
+        }
+    }
+
+    private Reflector createReflector(String type) {
+        switch(type) {
+            case "B": return new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT");
+            case "C": return new Reflector("FVPJIAOYEDRZXWGCTKUQSBNMHL");
+            default: throw new IllegalArgumentException("Invalid reflector type: " + type);
+        }
+    }
+
+    public void setRotors(int left, int middle, int right) {
+        this.left.setPosition(left);
+        this.middle.setPosition(middle);
+        this.right.setPosition(right);
+    }
+
+    private void rotate() {
+        if (this.middle.atNotch()) {
+            this.middle.step();
+            this.left.step();
+        } else if (this.right.atNotch()) {
+            this.middle.step();
+        }
+        this.right.step();
+    }
+
+    public char encodeDecode(char c) {
+        if (c < 'A' || c > 'Z') {
             return ' ';
         }
-        rotate(left, middle, right);
+        rotate();
 
-        //com.kylnan.enigma.Plugboard in
-        char signal = plugboard.encode(c);
+        // Plugboard in
+        char signal = this.plugboard.encode(c);
 
         // Right to left encoding
-        char s1 = right.encodeForward(signal);
-        char s2 = middle.encodeForward(s1);
-        char s3 = left.encodeForward(s2);
+        char s1 = this.right.encodeForward(signal);
+        char s2 = this.middle.encodeForward(s1);
+        char s3 = this.left.encodeForward(s2);
 
         // Through reflector
-        char s4 = reflector.encode(s3);
+        char s4 = this.reflector.encode(s3);
 
         // Left to right encoding
-        char s5 = left.encodeBackward(s4);
-        char s6 = middle.encodeBackward(s5);
-        char s7 = right.encodeBackward(s6);
+        char s5 = this.left.encodeBackward(s4);
+        char s6 = this.middle.encodeBackward(s5);
+        char s7 = this.right.encodeBackward(s6);
 
-        //com.kylnan.enigma.Plugboard out
-        s7 = plugboard.encode(s7);
-
-        return s7;
+        // Plugboard out
+        return this.plugboard.encode(s7);
     }
-
-    public static void main(String[] args) {
-        // Example usage with rotors I, II, III and reflector B
-        Rotor right = new Rotor("EKMFLGDQVZNTOWYHXUSPAIBRCJ", 'Q'); // com.kylnan.enigma.Rotor I
-        Rotor middle = new Rotor("AJDKSIRUXBLHWTMCQGZNPYFVOE", 'E'); // com.kylnan.enigma.Rotor II
-        Rotor left = new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'V'); // com.kylnan.enigma.Rotor III
-        Reflector reflector = new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT"); // com.kylnan.enigma.Reflector B
-        Plugboard plugboard = new Plugboard("AB CD EF GH");
-
-        // Example encode/decode
-        String message = "welcome to enigma";
-        String correctedMsg = message.toUpperCase();
-        StringBuilder encodedMessage = new StringBuilder();
-
-        for (char c : correctedMsg.toCharArray()) {
-            encodedMessage.append(encodeDecode(left, middle, right, reflector, plugboard, c));
-        }
-
-        System.out.println("Encoded Message: " + encodedMessage);
-
-        // Reset rotor positions to decode
-        right.setPosition(0);
-        middle.setPosition(0);
-        left.setPosition(0);
-
-        StringBuilder decodedMessage = new StringBuilder();
-
-        for (char c : encodedMessage.toString().toCharArray()) {
-            decodedMessage.append(encodeDecode(left, middle, right, reflector, plugboard, c));
-        }
-
-        System.out.println("Decoded Message: " + decodedMessage);
-    }
-
 }
