@@ -7,8 +7,8 @@ public class Main {
         // Application.launch(com.kylnan.GUI.class, args);
 
         // Enigma Testing for encapsulation
-        Enigma enigma = new Enigma("I", "II", "III", "B", "");
-        int[] positions = {0,0,0};
+        Enigma enigma = new Enigma("II", "IV", "V", "B", "bq cr di ej kw mt os px uz gh".toUpperCase());
+        int[] positions = {1,17,12};
         int[] ringSettings = {0,0,0};
         enigma.setRotors(positions[0], positions[1], positions[2]);
         enigma.setRingSettings(ringSettings[0], ringSettings[1], ringSettings[2]);

@@ -47,12 +47,15 @@ public class Enigma {
     }
 
     public void rotate() {
+        // Double stepping
         if (middle.atNotch()) {
             middle.step();
             left.step();
         } else if (right.atNotch()) {
             middle.step();
         }
+
+        // Stepping regardless
         right.step();
     }
 
