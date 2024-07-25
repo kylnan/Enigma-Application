@@ -4,8 +4,8 @@ public class Enigma {
     private Rotor left;
     private Rotor middle;
     private Rotor right;
-    private final Reflector reflector;
-    private final Plugboard plugboard;
+    private Reflector reflector;
+    private Plugboard plugboard;
 
     public Enigma(String left, String middle, String right, String reflector, String plugboard) {
         this.left = createRotor(left);
@@ -22,7 +22,7 @@ public class Enigma {
             case "III" -> new Rotor("BDFHJLCPRTXVZNYEIWGAKMUSQO", 'W');
             case "IV" -> new Rotor("ESOVPZJAYQUIRHXLNFTGKDCMWB", 'K');
             case "V" -> new Rotor("VZBRGITYUPSDNHLXAWMJQOFECK", 'A');
-            default -> throw new IllegalArgumentException("Invalid rotor type: " + type);
+            default -> throw new IllegalArgumentException("Invalid rotor type");
         };
     }
 
@@ -30,7 +30,7 @@ public class Enigma {
         return switch (type) {
             case "B" -> new Reflector("YRUHQSLDPXNGOKMIEBFZCWVJAT");
             case "C" -> new Reflector("FVPJIAOYEDRZXWGCTKUQSBNMHL");
-            default -> throw new IllegalArgumentException("Invalid reflector type: " + type);
+            default -> throw new IllegalArgumentException("Invalid reflector type");
         };
     }
 
@@ -40,14 +40,20 @@ public class Enigma {
         this.right.setPosition(right);
     }
 
-    private void rotate() {
-        if (this.middle.atNotch()) {
-            this.middle.step();
-            this.left.step();
-        } else if (this.right.atNotch()) {
-            this.middle.step();
+    public void setRingSettings(int left, int middle, int right) {
+        this.left.setRingSetting(left);
+        this.middle.setRingSetting(middle);
+        this.right.setRingSetting(right);
+    }
+
+    public void rotate() {
+        if (middle.atNotch()) {
+            middle.step();
+            left.step();
+        } else if (right.atNotch()) {
+            middle.step();
         }
-        this.right.step();
+        right.step();
     }
 
     public char encodeDecode(char c) {
@@ -56,23 +62,23 @@ public class Enigma {
         }
         rotate();
 
-        // Plugboard in
-        char signal = this.plugboard.encode(c);
+        //Plugboard in
+        char signal = plugboard.encode(c);
 
-        // Right to left encoding
-        char s1 = this.right.encodeForward(signal);
-        char s2 = this.middle.encodeForward(s1);
-        char s3 = this.left.encodeForward(s2);
+        //Right to Left
+        char s1 = right.encodeForward(signal);
+        char s2 = middle.encodeForward(s1);
+        char s3 = left.encodeForward(s2);
 
-        // Through reflector
-        char s4 = this.reflector.encode(s3);
+        //Reflector
+        char s4 = reflector.encode(s3);
 
-        // Left to right encoding
-        char s5 = this.left.encodeBackward(s4);
-        char s6 = this.middle.encodeBackward(s5);
-        char s7 = this.right.encodeBackward(s6);
+        //Left to Right
+        char s5 = left.encodeBackward(s4);
+        char s6 = middle.encodeBackward(s5);
+        char s7 = right.encodeBackward(s6);
 
-        // Plugboard out
-        return this.plugboard.encode(s7);
+        //Plugboard out
+        return plugboard.encode(s7);
     }
 }

@@ -4,23 +4,25 @@ import javafx.application.Application;
 
 public class Main {
     public static void main(String[] args) {
-        Application.launch(com.kylnan.GUI.class, args);
+        // Application.launch(com.kylnan.GUI.class, args);
 
-        /* Enigma Testing for encapsulation
+        // Enigma Testing for encapsulation
         Enigma enigma = new Enigma("I", "II", "III", "B", "");
+        int[] positions = {0,0,0};
+        int[] ringSettings = {0,0,0};
+        enigma.setRotors(positions[0], positions[1], positions[2]);
+        enigma.setRingSettings(ringSettings[0], ringSettings[1], ringSettings[2]);
 
-        enigma.setRotors(0, 0, 0);
-
-        String message = "HELLO world".toUpperCase();
+        String message = "HELLO".toUpperCase();
         StringBuilder encoded = new StringBuilder();
 
         for (char c : message.toCharArray()) {
             encoded.append(enigma.encodeDecode(c));
         }
 
-        System.out.println(STR."Encoded message: \{encoded.toString()}");
+        System.out.println("Encoded Message: " + encoded);
 
-        enigma.setRotors(0, 0, 0);
+        enigma.setRotors(positions[0], positions[1], positions[2]);
 
         String encodedString = encoded.toString();
         StringBuilder decoded = new StringBuilder();
@@ -28,7 +30,6 @@ public class Main {
         for (char c : encodedString.toCharArray()) {
             decoded.append(enigma.encodeDecode(c));
         }
-        System.out.println(STR."Decoded message: \{decoded.toString()}");
-         */
+        System.out.println("Decoded Message: " + decoded);
     }
 }

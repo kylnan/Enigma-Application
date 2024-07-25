@@ -1,54 +1,54 @@
 package com.kylnan.enigma;
 
 public class Rotor {
-    private final String wiring;  // rotor sets I-V
-    private int position;   // gives current index/position of the rotor
-    private final int notch;      // The notch position that sets off the next rotor found on https://en.wikipedia.org/wiki/Enigma_machine#Rotors
-    private final String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private final String wiring;
+    private int position;
+    private int ringSetting;
+    private final char notch;
 
-    // Constructor
     public Rotor(String wiring, char notch) {
         this.wiring = wiring;
-        this.position = 0; // setting default position to 0
-        this.notch = notch - 'A';
+        this.notch = notch;
+        this.position = 0;
+        this.ringSetting = 0;
     }
 
-    // set initial position of the rotor
     public void setPosition(int position) {
-        if (position < 0 || position > 25){
-            throw new IllegalArgumentException("Position must be between 0 and 25");
-        }
         this.position = position;
     }
 
-    // step through the rotor
-    public void step(){
-        this.position = (this.position + 1) % 26;
+    public void setRingSetting(int ringSetting) {
+        this.ringSetting = ringSetting;
     }
 
-    public char encodeForward(char input){
-        // convert the input character to an index in the alphabet with respect to position
-        int index = (input - 'A' + position) % 26;
-        // find where input character is mapped to in wiring
-        char substitute = wiring.charAt(index);
-        // Find substitute in alphabet and rotate rotor back to 0
-        int substituteIndex = (substitute - 'A' - position + 26) % 26;
-        return alphabet.charAt(substituteIndex);
+    public boolean atNotch() {
+        return (wiring.charAt(position) == notch);
     }
 
-    public char encodeBackward(char input){
-        int index = (input - 'A' + position) % 26;
-        int wiringIndex = (wiring.indexOf((char) (index + 'A')));
-        int outputIndex = (wiringIndex - position + 26) % 26;
-        return alphabet.charAt(outputIndex);
+    public void step() {
+        position = (position + 1) % 26;
     }
 
 
-    public int getPosition(){
-        return this.position;
+    public char encodeForward(char c) {
+        int shiftAmount = position - ringSetting;
+        char shiftedIn = shift(c, shiftAmount);
+        char encoded = wiring.charAt(shiftedIn - 'A');
+        return shift(encoded, -shiftAmount);
     }
 
-    public boolean atNotch(){
-        return getPosition() == this.notch;
+    public char encodeBackward(char c) {
+        int shiftAmount = position - ringSetting;
+        char shiftedIn = shift(c, shiftAmount);
+        char encoded = (char)(wiring.indexOf(shiftedIn) + 'A');
+        return shift(encoded, -shiftAmount);
+    }
+
+    private char shift(char c, int amount) {
+        int shifted = (c - 'A' + amount) % 26;
+        if (shifted < 0) {
+            shifted += 26;
+        }
+        return (char) ('A' + shifted);
     }
 }
