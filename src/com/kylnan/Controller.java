@@ -1,11 +1,13 @@
 package com.kylnan;
 
 import com.kylnan.enigma.Enigma;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+
 
 
 public class Controller {
@@ -208,5 +210,14 @@ public class Controller {
 
     private void appendToOutput(char encodedCharacter) {
         outputArea.appendText(String.valueOf(encodedCharacter));
+    }
+
+    public void clearOutput(ActionEvent e){
+        outputArea.clear();
+    }
+
+    public void reset(ActionEvent e){
+        enigma.setRotors(0, 0 ,0);
+        enigma.setRingSettings(0, 0, 0);
     }
 }
