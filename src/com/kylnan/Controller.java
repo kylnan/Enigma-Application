@@ -84,6 +84,9 @@ public class Controller {
             if (character.matches("[a-zA-Z]")) {
                 processInput(character.toUpperCase().charAt(0));
             }
+            else{
+                processInput(' ');
+            }
         });
     }
 
