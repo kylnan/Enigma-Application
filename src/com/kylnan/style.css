@@ -1,0 +1,11 @@
+.lamp {
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 2;
+    /* -fx-border-radius: 15; /* Half of min-width and min-height */
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+    -fx-max-width: 30;
+    -fx-max-height: 30;
+    -fx-alignment: center; /* Center the text inside the label */
+}
