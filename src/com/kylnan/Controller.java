@@ -85,13 +85,14 @@ public class Controller {
                 processInput(character.toUpperCase().charAt(0));
             }
             else{
-                processInput(' ');
+                outputArea.appendText(character);
             }
         });
     }
 
     private void processInput(char character) {
         char encodedCharacter = enigma.encodeDecode(character);
+
         updateLampboard(encodedCharacter);
         appendToOutput(encodedCharacter);
     }
@@ -217,6 +218,7 @@ public class Controller {
 
     public void clearOutput(ActionEvent e){
         outputArea.clear();
+        inputField.clear();
     }
 
     public void reset(ActionEvent e){
