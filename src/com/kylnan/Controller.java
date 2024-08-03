@@ -2,12 +2,15 @@ package com.kylnan;
 
 import com.kylnan.enigma.Enigma;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
@@ -25,90 +28,60 @@ public class Controller implements Initializable {
     private AnchorPane lampPane;
 
     @FXML
-    private ChoiceBox<String> ringSetting1;
-    @FXML
-    private ChoiceBox<String> ringSetting2;
-    @FXML
-    private ChoiceBox<String> ringSetting3;
+    private ChoiceBox<String> ringSetting1, ringSetting2, ringSetting3;
 
     @FXML
-    private ChoiceBox<String> rotorPosition1;
-    @FXML
-    private ChoiceBox<String> rotorPosition2;
-    @FXML
-    private ChoiceBox<String> rotorPosition3;
+    private ChoiceBox<String> rotorPosition1, rotorPosition2, rotorPosition3;
 
     private String[] ringPositions = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"};
 
     @FXML
-    private Label lampQ;
-    @FXML
-    private Label lampW;
-    @FXML
-    private Label lampE;
-    @FXML
-    private Label lampR;
-    @FXML
-    private Label lampT;
-    @FXML
-    private Label lampY;
-    @FXML
-    private Label lampU;
-    @FXML
-    private Label lampI;
-    @FXML
-    private Label lampO;
-    @FXML
-    private Label lampP;
-    @FXML
-    private Label lampA;
-    @FXML
-    private Label lampS;
-    @FXML
-    private Label lampD;
-    @FXML
-    private Label lampF;
-    @FXML
-    private Label lampG;
-    @FXML
-    private Label lampH;
-    @FXML
-    private Label lampJ;
-    @FXML
-    private Label lampK;
-    @FXML
-    private Label lampL;
-    @FXML
-    private Label lampZ;
-    @FXML
-    private Label lampX;
-    @FXML
-    private Label lampC;
-    @FXML
-    private Label lampV;
-    @FXML
-    private Label lampB;
-    @FXML
-    private Label lampN;
-    @FXML
-    private Label lampM;
+    private Label lampQ, lampW, lampE, lampR, lampT, lampY, lampU, lampI, lampO, lampP,
+            lampA, lampS, lampD, lampF, lampG, lampH, lampJ, lampK, lampL, lampZ,
+            lampX, lampC, lampV, lampB, lampN, lampM;
 
     private Enigma enigma;
+    private boolean[] keyPressed = new boolean[256];
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         enigma = new Enigma();
 
         // Key press handling
-        inputField.setOnKeyTyped(event -> {
-            String character = event.getCharacter();
-            if (character.matches("[a-zA-Z]")) {
-                processInput(character.toUpperCase().charAt(0));
-            }
-            else{
-                outputArea.appendText(character);
+        inputField.setOnKeyTyped(event -> event.consume());
+
+        inputField.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                KeyCode keyCode = event.getCode();
+                String character = event.getText().toUpperCase();
+
+                if (character.matches("[A-Z]") && !keyPressed[keyCode.getCode()]) {
+                    keyPressed[keyCode.getCode()] = true;
+                    processInput(character.charAt(0));
+                    event.consume();
+                } else if (keyCode == KeyCode.SPACE && !keyPressed[keyCode.getCode()]) {
+                    keyPressed[keyCode.getCode()] = true;
+                    appendToOutput(' ');
+                    event.consume();
+                }
             }
         });
+
+        inputField.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                KeyCode keyCode = event.getCode();
+                String character = event.getText().toUpperCase();
+
+                if (character.matches("[A-Z]") || keyCode == KeyCode.SPACE) {
+                    keyPressed[keyCode.getCode()] = false;
+                    resetLampboard();
+                    event.consume();
+                }
+            }
+        });
+
 
         // ring settings
         ringSetting1.getItems().addAll(ringPositions);
