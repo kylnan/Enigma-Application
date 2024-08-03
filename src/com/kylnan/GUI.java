@@ -18,6 +18,7 @@ public class GUI extends Application {
         Scene scene = new Scene(root, 1280, 720);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         stage.setScene(scene);
+
         // must always be at the end
         stage.setTitle("Enigma by Kylnan");
         stage.setScene(scene);

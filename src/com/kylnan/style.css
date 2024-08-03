@@ -1,11 +1,30 @@
+.root{
+    -fx-background-color: #2e2e2e;
+}
+
+.label{
+    -fx-font-size: 20;
+    -fx-font-family: "Lucida Console";
+    -fx-alignment: center;
+    -fx-text-fill: white;
+}
+
 .lamp {
     -fx-background-color: transparent;
-    -fx-border-color: black;
+    -fx-background-radius: 15;
+    -fx-border-color: white;
     -fx-border-width: 2;
-    /* -fx-border-radius: 15; /* Half of min-width and min-height */
+    -fx-border-radius: 15; /* Half of min-width and min-height */
     -fx-min-width: 30;
     -fx-min-height: 30;
     -fx-max-width: 30;
     -fx-max-height: 30;
     -fx-alignment: center; /* Center the text inside the label */
+    -fx-font-family: "Lucida Console";
+}
+
+.choice-box {
+    -fx-background-color: dimgray;
+    -fx-control-inner-background: dimgray;
+    -fx-selection-bar: midnightblue;
 }

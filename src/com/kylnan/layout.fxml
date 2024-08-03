@@ -1,57 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1280.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kylnan.Controller">
-   <TextField fx:id="inputField" layoutX="490.0" layoutY="46.0" prefHeight="72.0" prefWidth="300" promptText="Plaintext">
+   <TextField fx:id="inputField" layoutX="486.0" layoutY="93.0" prefHeight="72.0" prefWidth="300.0" promptText="Plaintext">
       <font>
          <Font size="24.0" />
       </font></TextField>
 
-   <TextArea fx:id="outputArea" editable="false" layoutX="490.0" layoutY="177.0" prefHeight="30.0" prefWidth="300" promptText="Ciphertext" wrapText="false">
+   <TextArea fx:id="outputArea" editable="false" layoutX="486.0" layoutY="193.0" prefHeight="30.0" prefWidth="300.0" promptText="Ciphertext" wrapText="false">
       <font>
          <Font size="24.0" />
       </font></TextArea>
 
-   <AnchorPane fx:id="lampPane" layoutX="445.0" layoutY="305.0" prefWidth="456.0">
+   <AnchorPane fx:id="lampPane" layoutX="439.0" layoutY="305.0">
       <!-- QWERTY Keyboard Layout -->
       <!-- Row 1: QWERTYUIOP -->
-      <Label fx:id="lampQ" layoutX="0" layoutY="0" styleClass="lamp" text="Q" />
-      <Label fx:id="lampW" layoutX="40" layoutY="0" styleClass="lamp" text="W" />
-      <Label fx:id="lampE" layoutX="80" layoutY="0" styleClass="lamp" text="E" />
-      <Label fx:id="lampR" layoutX="120" layoutY="0" styleClass="lamp" text="R" />
-      <Label fx:id="lampT" layoutX="160" layoutY="0" styleClass="lamp" text="T" />
-      <Label fx:id="lampY" layoutX="200" layoutY="0" styleClass="lamp" text="Y" />
-      <Label fx:id="lampU" layoutX="240" layoutY="0" styleClass="lamp" text="U" />
-      <Label fx:id="lampI" layoutX="280" layoutY="0" styleClass="lamp" text="I" />
-      <Label fx:id="lampO" layoutX="320" layoutY="0" styleClass="lamp" text="O" />
-      <Label fx:id="lampP" layoutX="360" layoutY="0" styleClass="lamp" text="P" />
+      <Label fx:id="lampQ" styleClass="lamp" text="Q" />
+      <Label fx:id="lampW" layoutX="40.0" styleClass="lamp" text="W" />
+      <Label fx:id="lampE" layoutX="80.0" styleClass="lamp" text="E" />
+      <Label fx:id="lampR" layoutX="120.0" styleClass="lamp" text="R" />
+      <Label fx:id="lampT" layoutX="160.0" styleClass="lamp" text="T" />
+      <Label fx:id="lampY" layoutX="200.0" styleClass="lamp" text="Y" />
+      <Label fx:id="lampU" layoutX="240.0" styleClass="lamp" text="U" />
+      <Label fx:id="lampI" layoutX="280.0" styleClass="lamp" text="I" />
+      <Label fx:id="lampO" layoutX="320.0" styleClass="lamp" text="O" />
+      <Label fx:id="lampP" layoutX="360.0" styleClass="lamp" text="P" />
 
       <!-- Row 2: ASDFGHJKL -->
-      <Label fx:id="lampA" layoutX="20" layoutY="40" styleClass="lamp" text="A" />
-      <Label fx:id="lampS" layoutX="60" layoutY="40" styleClass="lamp" text="S" />
-      <Label fx:id="lampD" layoutX="100" layoutY="40" styleClass="lamp" text="D" />
-      <Label fx:id="lampF" layoutX="140" layoutY="40" styleClass="lamp" text="F" />
-      <Label fx:id="lampG" layoutX="180" layoutY="40" styleClass="lamp" text="G" />
-      <Label fx:id="lampH" layoutX="220" layoutY="40" styleClass="lamp" text="H" />
-      <Label fx:id="lampJ" layoutX="260" layoutY="40" styleClass="lamp" text="J" />
-      <Label fx:id="lampK" layoutX="300" layoutY="40" styleClass="lamp" text="K" />
-      <Label fx:id="lampL" layoutX="340" layoutY="40" styleClass="lamp" text="L" />
+      <Label fx:id="lampA" layoutX="20.0" layoutY="40.0" styleClass="lamp" text="A" />
+      <Label fx:id="lampS" layoutX="60.0" layoutY="40.0" styleClass="lamp" text="S" />
+      <Label fx:id="lampD" layoutX="100.0" layoutY="40.0" styleClass="lamp" text="D" />
+      <Label fx:id="lampF" layoutX="140.0" layoutY="40.0" styleClass="lamp" text="F" />
+      <Label fx:id="lampG" layoutX="180.0" layoutY="40.0" styleClass="lamp" text="G" />
+      <Label fx:id="lampH" layoutX="220.0" layoutY="40.0" styleClass="lamp" text="H" />
+      <Label fx:id="lampJ" layoutX="260.0" layoutY="40.0" styleClass="lamp" text="J" />
+      <Label fx:id="lampK" layoutX="300.0" layoutY="40.0" styleClass="lamp" text="K" />
+      <Label fx:id="lampL" layoutX="340.0" layoutY="40.0" styleClass="lamp" text="L" />
 
       <!-- Row 3: ZXCVBNM -->
-      <Label fx:id="lampZ" layoutX="60" layoutY="80" styleClass="lamp" text="Z" />
-      <Label fx:id="lampX" layoutX="100" layoutY="80" styleClass="lamp" text="X" />
-      <Label fx:id="lampC" layoutX="140" layoutY="80" styleClass="lamp" text="C" />
-      <Label fx:id="lampV" layoutX="180" layoutY="80" styleClass="lamp" text="V" />
-      <Label fx:id="lampB" layoutX="220" layoutY="80" styleClass="lamp" text="B" />
-      <Label fx:id="lampN" layoutX="260" layoutY="80" styleClass="lamp" text="N" />
-      <Label fx:id="lampM" layoutX="300" layoutY="80" styleClass="lamp" text="M" />
+      <Label fx:id="lampZ" layoutX="60.0" layoutY="80.0" styleClass="lamp" text="Z" />
+      <Label fx:id="lampX" layoutX="100.0" layoutY="80.0" styleClass="lamp" text="X" />
+      <Label fx:id="lampC" layoutX="140.0" layoutY="80.0" styleClass="lamp" text="C" />
+      <Label fx:id="lampV" layoutX="180.0" layoutY="80.0" styleClass="lamp" text="V" />
+      <Label fx:id="lampB" layoutX="220.0" layoutY="80.0" styleClass="lamp" text="B" />
+      <Label fx:id="lampN" layoutX="260.0" layoutY="80.0" styleClass="lamp" text="N" />
+      <Label fx:id="lampM" layoutX="300.0" layoutY="80.0" styleClass="lamp" text="M" />
    </AnchorPane>
-   <Button layoutX="814.0" layoutY="177.0" mnemonicParsing="false" onAction="#clearOutput" text="Clear" />
-   <Button layoutX="814.0" layoutY="224.0" mnemonicParsing="false" onAction="#reset" text="Reset Machine" />
+   <VBox layoutX="811.0" layoutY="204.0">
+      <children>
+         <Button mnemonicParsing="false" onAction="#reset" text="Reset Machine" />
+         <Button mnemonicParsing="false" onAction="#clearOutput" text="Clear" />
+      </children>
+   </VBox>
+   <HBox layoutX="203.0" layoutY="129.0">
+      <children>
+         <ChoiceBox fx:id="ringSetting1" prefHeight="25.0" prefWidth="30.0" />
+         <ChoiceBox fx:id="ringSetting2" prefHeight="25.0" prefWidth="30.0" />
+         <ChoiceBox fx:id="ringSetting3" prefHeight="25.0" prefWidth="30.0" />
+      </children>
+   </HBox>
+   <Label layoutX="197.0" layoutY="107.0" text="Ring Settings" />
+   <HBox layoutX="203.0" layoutY="229.0">
+      <children>
+         <ChoiceBox fx:id="rotorPosition1" prefHeight="25.0" prefWidth="30.0" />
+         <ChoiceBox fx:id="rotorPosition2" prefHeight="25.0" prefWidth="30.0" />
+         <ChoiceBox fx:id="rotorPosition3" prefHeight="25.0" prefWidth="30.0" />
+      </children>
+   </HBox>
+   <Label layoutX="193.0" layoutY="205.0" text="Rotor Settings" />
+   <padding>
+      <Insets bottom="50.0" left="100.0" right="100.0" top="50.0" />
+   </padding>
 </AnchorPane>
