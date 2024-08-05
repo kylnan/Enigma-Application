@@ -62,7 +62,7 @@ public class Controller implements Initializable {
                     event.consume();
                 } else if (keyCode == KeyCode.SPACE && !keyPressed[keyCode.getCode()]) {
                     keyPressed[keyCode.getCode()] = true;
-                    appendToOutput(' ');
+                    outputArea.appendText(character);
                     event.consume();
                 }
             }
