@@ -277,13 +277,6 @@ public class Controller implements Initializable {
         rotorDisplay1.setText("1");
         rotorDisplay2.setText("1");
         rotorDisplay3.setText("1");
-
-        rotorOption1.setValue("I");
-        rotorOption2.setValue("II");
-        rotorOption3.setValue("III");
-
-        reflectorOption.setValue("B");
-
     }
 
     public void reset(){
