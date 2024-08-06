@@ -9,6 +9,17 @@
     -fx-text-fill: white;
 }
 
+.rotorDisplay{
+    -fx-font-size: 24;
+    -fx-font-family: "Lucida Console";
+    -fx-alignment: center;
+    -fx-text-fill: white;
+    -fx-background-color: dimgray;
+    -fx-pref-height: 45;
+    -fx-pref-width: 45;
+    -fx-border-color: white;
+}
+
 .lamp {
     -fx-background-color: transparent;
     -fx-background-radius: 15;
@@ -24,7 +35,24 @@
 }
 
 .choice-box {
+    -fx-pref-width: 20;
+    -fx-font-size: 16;
     -fx-background-color: dimgray;
+    -fx-border-color: white;
+    -fx-border-width: 2;
     -fx-control-inner-background: dimgray;
     -fx-selection-bar: midnightblue;
+}
+
+.button{
+    -fx-font-family: "Lucida Console";
+    -fx-font-size: 24;
+    -fx-background-color: dimgray;
+    -fx-border-color: white;
+    -fx-border-width: 2;
+    -fx-text-fill: white;
+}
+
+.button:hover{
+    -fx-background-color: gray;
 }

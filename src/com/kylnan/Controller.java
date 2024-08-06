@@ -27,12 +27,14 @@ public class Controller implements Initializable {
     private AnchorPane lampPane;
 
     @FXML
-    private ChoiceBox<String> ringSetting1, ringSetting2, ringSetting3;
+    private ChoiceBox<String> ringSetting1, ringSetting2, ringSetting3, rotorPosition1, rotorPosition2, rotorPosition3, rotorOption1, rotorOption2, rotorOption3, reflectorOption;
 
     @FXML
-    private ChoiceBox<String> rotorPosition1, rotorPosition2, rotorPosition3;
+    private Label rotorDisplay1, rotorDisplay2, rotorDisplay3;
 
-    private String[] ringPositions = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"};
+    private final String[] ringPositions = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26"};
+    private final String[] rotorOptions = {"I", "II", "III", "IV", "V"};
+    private final String[] reflectorOptions = {"B", "C"};
 
     @FXML
     private Label lampQ, lampW, lampE, lampR, lampT, lampY, lampU, lampI, lampO, lampP,
@@ -53,6 +55,8 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         enigma = new Enigma();
 
+        // initial reset
+        reset();
         // Key press handling
         inputField.setOnKeyTyped(event -> event.consume());
 
@@ -82,6 +86,7 @@ public class Controller implements Initializable {
 
                 if (character.matches("[A-Z]") || keyCode == KeyCode.SPACE) {
                     keyPressed[keyCode.getCode()] = false;
+                    displayRotors();
                     resetLampboard();
                     event.consume();
                 }
@@ -92,20 +97,36 @@ public class Controller implements Initializable {
         // ring settings
         ringSetting1.getItems().addAll(ringPositions);
         ringSetting1.setOnAction(this::ringSettings);
+
         ringSetting2.getItems().addAll(ringPositions);
         ringSetting2.setOnAction(this::ringSettings);
+
         ringSetting3.getItems().addAll(ringPositions);
         ringSetting3.setOnAction(this::ringSettings);
 
         rotorPosition1.getItems().addAll(ringPositions);
         rotorPosition1.setOnAction(this::rotorPositions);
+
         rotorPosition2.getItems().addAll(ringPositions);
         rotorPosition2.setOnAction(this::rotorPositions);
+
         rotorPosition3.getItems().addAll(ringPositions);
         rotorPosition3.setOnAction(this::rotorPositions);
 
-        // initial reset
-        reset();
+        // change rotors
+        rotorOption1.getItems().addAll(rotorOptions);
+        rotorOption1.setOnAction(this::changeRotors);
+
+        rotorOption2.getItems().addAll(rotorOptions);
+        rotorOption2.setOnAction(this::changeRotors);
+
+        rotorOption3.getItems().addAll(rotorOptions);
+        rotorOption3.setOnAction(this::changeRotors);
+
+        // change reflector
+        reflectorOption.getItems().addAll(reflectorOptions);
+        reflectorOption.setOnAction(this::changeReflector);
+
 
     }
 
@@ -252,6 +273,17 @@ public class Controller implements Initializable {
         rotorPosition1.setValue("1");
         rotorPosition2.setValue("1");
         rotorPosition3.setValue("1");
+
+        rotorDisplay1.setText("1");
+        rotorDisplay2.setText("1");
+        rotorDisplay3.setText("1");
+
+        rotorOption1.setValue("I");
+        rotorOption2.setValue("II");
+        rotorOption3.setValue("III");
+
+        reflectorOption.setValue("B");
+
     }
 
     public void reset(){
@@ -265,6 +297,16 @@ public class Controller implements Initializable {
         rotorPosition1.setValue("1");
         rotorPosition2.setValue("1");
         rotorPosition3.setValue("1");
+
+        rotorOption1.setValue("I");
+        rotorOption2.setValue("II");
+        rotorOption3.setValue("III");
+
+        reflectorOption.setValue("B");
+
+        rotorDisplay1.setText("1");
+        rotorDisplay2.setText("1");
+        rotorDisplay3.setText("1");
     }
 
     public void ringSettings(ActionEvent e){
@@ -297,6 +339,9 @@ public class Controller implements Initializable {
             String rightString = rotorPosition3.getValue();
             int right = Integer.parseInt(rightString) - 1;
 
+            rotorDisplay1.setText(leftString);
+            rotorDisplay2.setText(midString);
+            rotorDisplay3.setText(rightString);
             enigma.setRotors(left, mid, right);
         } catch (Exception ex){
             System.out.println("Null String");
@@ -304,11 +349,26 @@ public class Controller implements Initializable {
     }
 
     public void changeRotors(ActionEvent e){
-
+        String typeL = String.valueOf(rotorOption1.getValue());
+        String typeM = String.valueOf(rotorOption2.getValue());
+        String typeR = String.valueOf(rotorOption3.getValue());
+        enigma.changeRotor("left", typeL);
+        enigma.changeRotor("middle", typeM);
+        enigma.changeRotor("right", typeR);
     }
 
-    public void displayRotors(ActionEvent e){
+    public void changeReflector(ActionEvent e){
+        enigma.changeReflector(String.valueOf(reflectorOption.getValue()));
+    }
 
+    public void displayRotors(){
+        String left = String.valueOf(enigma.left.getPosition() + 1);
+        String right = String.valueOf(enigma.right.getPosition() + 1);
+        String middle = String.valueOf(enigma.middle.getPosition() + 1);
+
+        rotorDisplay1.setText(left);
+        rotorDisplay2.setText(middle);
+        rotorDisplay3.setText(right);
     }
 
 }

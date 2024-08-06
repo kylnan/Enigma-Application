@@ -1,9 +1,9 @@
 package com.kylnan.enigma;
 
 public class Enigma {
-    private Rotor left;
-    private Rotor middle;
-    private Rotor right;
+    public Rotor left;
+    public Rotor middle;
+    public Rotor right;
     private Reflector reflector;
     private Plugboard plugboard;
 
