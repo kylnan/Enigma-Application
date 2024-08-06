@@ -5,6 +5,3 @@ The following [playlist](https://www.youtube.com/playlist?list=PLlN8XOgdVLtGt53i
 
 ## Demo
 ![](https://github.com/kylnan/Enigma/blob/master/ezgif-2-2bd9092935.gif)
-
-## Wiring Diagram
-![img.png](img.png)
