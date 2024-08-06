@@ -4,7 +4,7 @@ Hello! This repo will be documenting my development process for my own [Enigma M
 The following [playlist](https://www.youtube.com/playlist?list=PLlN8XOgdVLtGt53iKidWxbSQqk343XwBz) is a collection of sources I referenced to develop the project.
 
 ## Demo
-
+[](https://github.com/kylnan/Enigma/blob/master/ezgif-2-a10cba43ea.gif)
 
 ## Wiring Diagram
 ![img.png](img.png)
