@@ -5,15 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
@@ -39,6 +38,13 @@ public class Controller implements Initializable {
     private Label lampQ, lampW, lampE, lampR, lampT, lampY, lampU, lampI, lampO, lampP,
             lampA, lampS, lampD, lampF, lampG, lampH, lampJ, lampK, lampL, lampZ,
             lampX, lampC, lampV, lampB, lampN, lampM;
+
+    @FXML
+    private ToggleButton plugA, plugB, plugC, plugD, plugE, plugF, plugG, plugH, plugI, plugJ,
+            plugK, plugL, plugM, plugN, plugO, plugP, plugQ, plugR, plugS, plugT,
+            plugU, plugV, plugW, plugX, plugY, plugZ;
+
+    private List<ToggleButton> selectedPlugs = new ArrayList<>();
 
     private Enigma enigma;
     private boolean[] keyPressed = new boolean[256];
@@ -100,6 +106,7 @@ public class Controller implements Initializable {
 
         // initial reset
         reset();
+
     }
 
     private void processInput(char character) {
@@ -294,6 +301,14 @@ public class Controller implements Initializable {
         } catch (Exception ex){
             System.out.println("Null String");
         }
+    }
+
+    public void changeRotors(ActionEvent e){
 
     }
+
+    public void displayRotors(ActionEvent e){
+
+    }
+
 }

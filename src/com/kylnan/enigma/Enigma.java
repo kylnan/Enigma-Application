@@ -81,6 +81,10 @@ public class Enigma {
         right.step();
     }
 
+    public Plugboard getPlugboard(){
+        return this.plugboard;
+    }
+
     public char encodeDecode(char c) {
         if (c < 'A' || c > 'Z') {
             return ' ';

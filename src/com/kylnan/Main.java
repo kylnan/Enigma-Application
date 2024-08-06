@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Application.launch(com.kylnan.GUI.class, args);
 
-        /* Enigma Testing for encapsulation
+        /* Enigma Testing
         Enigma enigma = new Enigma("II", "IV", "V", "B", "bq cr di ej kw mt os px uz gh".toUpperCase());
         int[] positions = {1,17,12};
         int[] ringSettings = {0,0,0};

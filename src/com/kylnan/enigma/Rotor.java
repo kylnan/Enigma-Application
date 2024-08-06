@@ -29,16 +29,22 @@ public class Rotor {
         position = (position + 1) % 26;
     }
 
+    public int getPosition(){
+        return this.position;
+    }
+
 
     public char encodeForward(char c) {
-        // Calculate shift amount, basically the offset for the mapping for given orientation of the the rotor
+        // Calculate shift amount, basically the offset for the mapping for given orientation of the rotor
         int shiftAmount = position - ringSetting;
-        // Convert the mapping from and int to a char
+        // Convert the mapping from int to a char i.e. shift input to rotor position
         char mapping = shift(c, shiftAmount);
         // Find the encoding for the given mapping calculated
         char encoded = wiring.charAt(mapping - 'A');
-        // Revert the shift back, still not sure why we have to shift back
-        return shift(encoded, -shiftAmount);
+        // Revert the shift back
+        // Each rotor needs to refer to the standard alphabet for encoding, this is why we shift back
+        char output = shift(encoded, -shiftAmount);
+        return output;
     }
 
     public char encodeBackward(char c) {
@@ -48,6 +54,7 @@ public class Rotor {
         char mapping = shift(c, shiftAmount);
         // Instead of finding mapped character in wiring, find the character in the original alphabet
         char encoded = (char)(wiring.indexOf(mapping) + 'A');
+        // Same as encodeForward
         return shift(encoded, -shiftAmount);
     }
 
