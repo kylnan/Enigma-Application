@@ -3,5 +3,8 @@ Hello! This repo will be documenting my development process for my own [Enigma M
 
 The following [playlist](https://www.youtube.com/playlist?list=PLlN8XOgdVLtGt53iKidWxbSQqk343XwBz) is a collection of sources I referenced to develop the project.
 
-Wiring Diagram
+## Demo
+
+
+## Wiring Diagram
 ![img.png](img.png)
